@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates :email, format: { with: EMAIL_REGEX,
                               message: "is not a valid email." }
 
-  before_save :ensure_access_token
+  before_validation :ensure_access_token
 
   def ensure_access_token
     if self.access_token.blank?
