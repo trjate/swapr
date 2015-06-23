@@ -3,12 +3,12 @@ require 'test_helper'
 class ContrabandTest < ActiveSupport::TestCase
   test "contraband must have an owner" do
     cb = Contraband.new
-    refute cb.save, "no user id set"
+    refute cb.save, "Tried to save a user without an id"
   end
 
   test "can get the owner of contraband" do
-    cb = Contraband.create(user_id: 1)
-    assert_instance_of(User, cb.user)
+    cb = contrabands(:tswift)
+    assert_equal cb.user, users(:brit)
   end
 
   test "contraband must be under 10mb" do

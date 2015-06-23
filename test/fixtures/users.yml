@@ -1,11 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  email: MyString
-  password: MyString
-  access_token: MyString
+brit:
+  email: brit@theironyard.com
+  password: cookies
+  access_token: hunter2
 
-two:
-  email: MyString
-  password: MyString
-  access_token: MyString
+daniel:
+  email: top-secet@tiy.com
+  password: brownies
+  access_token: password
+
