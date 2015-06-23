@@ -15,3 +15,6 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore things that could lose me money.
+.env
