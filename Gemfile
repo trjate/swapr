@@ -27,6 +27,8 @@ gem 'pg'
 gem 'puma'
 # I like S3, let's let them keep our files.
 gem 'aws-sdk'
+# Let's use paperclip to manage our files.
+gem 'paperclip'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
