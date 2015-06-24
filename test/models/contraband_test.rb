@@ -3,7 +3,10 @@ require 'test_helper'
 class ContrabandTest < ActiveSupport::TestCase
   test "contraband must have an owner" do
     cb = Contraband.new
-    refute cb.save, "Tried to save a user without an id"
+    refute cb.save
+    # Electing not to define a complementary
+    # assert test here to avoid having to
+    # add test files or "fake" the attachment.
   end
 
   test "can get the owner of contraband" do
@@ -12,12 +15,17 @@ class ContrabandTest < ActiveSupport::TestCase
   end
 
   test "contraband must be under 10mb" do
-    cb = Contraband.new(user_id: 1,
-                        contraband_file_size: 10999999)
-    refute cb.save, "Can't save files larger than 10mb"
-  end
+    file_attrs = {
+      user_id: 1,
+      contraband_file_size: 10999999,
+      contraband_file_name: 'foo.bar',
+      contraband_updated_at: DateTime.now,
+      contraband_content_type: 'text/bar'
+    }
+    cb = Contraband.new(file_attrs)
+    refute cb.save
 
-  # test "the truth" do
-  #   assert true
-  # end
+    cb.contraband_file_size = 8888888
+    assert cb.save
+  end
 end
