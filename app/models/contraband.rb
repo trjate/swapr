@@ -3,11 +3,11 @@ class Contraband < ActiveRecord::Base
   belongs_to :curation
 
   validates :user_id, presence: true
+  validates :curation_id, presence: true
 
   has_attached_file :contraband
   validates_attachment :contraband, presence: true,
     size: { in: 0..10.megabytes }
-
 
   def name
     # Note that we have to be clever here and use "direct access"

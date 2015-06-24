@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   validates :email, format: { with: EMAIL_REGEX,
                               message: "is not a valid email." }
 
+  has_many :curations
+  has_many :contrabands
+
   before_validation :ensure_access_token
 
   def ensure_access_token
