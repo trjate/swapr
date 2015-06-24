@@ -13,6 +13,14 @@ class ContrabandTest < ActiveSupport::TestCase
     assert_equal cb.user, users(:brit)
   end
 
+  test "contraband may have a custom name instead of filename" do
+    cb = contrabands(:tswift)
+    assert_equal cb.name, 'bad_blood'
+    cb.name = 'mad_love'
+    assert cb.save
+    assert_equal cb.name, 'mad_love'
+  end
+
   test "contraband may be in a folder or not" do
     custom_attrs = { name: 'glass swords', user: users(:brit) }
     attrs = @file_attrs.merge(custom_attrs)
