@@ -34,16 +34,16 @@ class ContrabandTest < ActiveSupport::TestCase
 
   test "contraband must be under 10mb" do
     cb = Contraband.new(@file_attrs)
-    refute cb.save
-
-    cb.contraband_file_size = 8888888
     assert cb.save
+
+    cb.contraband_file_size = 10999999
+    refute cb.save
   end
 
   def initialize_example_attrs
     @file_attrs = {
       user_id: 1,
-      contraband_file_size: 10999999,
+      contraband_file_size: 8888888,
       contraband_file_name: 'foo.bar',
       contraband_updated_at: DateTime.now,
       contraband_content_type: 'text/bar'
