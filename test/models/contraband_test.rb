@@ -21,11 +21,15 @@ class ContrabandTest < ActiveSupport::TestCase
     assert_equal cb.name, 'mad_love'
   end
 
-  test "contraband may be in a folder or not" do
-    custom_attrs = { name: 'glass swords', user: users(:brit) }
+  test "contraband must be in a curation" do
+    custom_attrs = {
+      name: 'glass swords',
+      user: users(:brit),
+      curation: nil
+    }
     attrs = @file_attrs.merge(custom_attrs)
     rustie = Contraband.new(attrs)
-    assert rustie.save
+    refute rustie.save
 
     rustie.curation = curations(:brits_music)
     assert_equal rustie.curation, curations(:brits_music)
@@ -46,7 +50,8 @@ class ContrabandTest < ActiveSupport::TestCase
       contraband_file_size: 8888888,
       contraband_file_name: 'foo.bar',
       contraband_updated_at: DateTime.now,
-      contraband_content_type: 'text/bar'
+      contraband_content_type: 'text/bar',
+      curation: curations(:brits_music)
     }
   end
 end
