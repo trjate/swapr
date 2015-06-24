@@ -1,4 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 tswift:
+  contraband_file_name: 'bad_blood'
   user: brit
+  curation: brits_music
+
+klamar:
+  user: daniel
+  curation: good_kid_maad_city

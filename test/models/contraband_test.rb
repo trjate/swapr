@@ -1,12 +1,11 @@
 require 'test_helper'
 
 class ContrabandTest < ActiveSupport::TestCase
+  setup :initialize_example_attrs
+
   test "contraband must have an owner" do
     cb = Contraband.new
     refute cb.save
-    # Electing not to define a complementary
-    # assert test here to avoid having to
-    # add test files or "fake" the attachment.
   end
 
   test "can get the owner of contraband" do
@@ -14,18 +13,45 @@ class ContrabandTest < ActiveSupport::TestCase
     assert_equal cb.user, users(:brit)
   end
 
+  test "contraband may have a custom name instead of filename" do
+    cb = contrabands(:tswift)
+    assert_equal cb.name, 'bad_blood'
+    cb.name = 'mad_love'
+    assert cb.save
+    assert_equal cb.name, 'mad_love'
+  end
+
+  test "contraband must be in a curation" do
+    custom_attrs = {
+      name: 'glass swords',
+      user: users(:brit),
+      curation: nil
+    }
+    attrs = @file_attrs.merge(custom_attrs)
+    rustie = Contraband.new(attrs)
+    refute rustie.save
+
+    rustie.curation = curations(:brits_music)
+    assert_equal rustie.curation, curations(:brits_music)
+    assert rustie.save
+  end
+
   test "contraband must be under 10mb" do
-    file_attrs = {
+    cb = Contraband.new(@file_attrs)
+    assert cb.save
+
+    cb.contraband_file_size = 10999999
+    refute cb.save
+  end
+
+  def initialize_example_attrs
+    @file_attrs = {
       user_id: 1,
-      contraband_file_size: 10999999,
+      contraband_file_size: 8888888,
       contraband_file_name: 'foo.bar',
       contraband_updated_at: DateTime.now,
-      contraband_content_type: 'text/bar'
+      contraband_content_type: 'text/bar',
+      curation: curations(:brits_music)
     }
-    cb = Contraband.new(file_attrs)
-    refute cb.save
-
-    cb.contraband_file_size = 8888888
-    assert cb.save
   end
 end

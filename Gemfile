@@ -29,6 +29,8 @@ gem 'puma'
 gem 'aws-sdk'
 # Let's use paperclip to manage our files.
 gem 'paperclip'
+# We should be able to organize files in a coherent way tho.
+gem 'acts_as_tree'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

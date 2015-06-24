@@ -1,0 +1,16 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+brits_music:
+  name: My Albums
+  user: brit 
+  parent_id: nil
+
+daniels_music:
+  name: songs_or_whatever
+  user: daniel 
+  parent_id: nil
+
+good_kid_maad_city:
+  name: good kid, maad city (2012)
+  user: daniel 
+  parent_id: daniels_music 
