@@ -2,3 +2,12 @@
 
 tswift:
   user: brit
+  curation: brits_music
+
+rustie:
+  user: brit
+  curation_id: nil
+
+klamar:
+  user: daniel
+  curation: good_kid_maad_city
