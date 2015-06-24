@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def regenerate_token!
+    self.access_token = nil
+    self.save
+  end
+
   def self.generate_token
     token = SecureRandom.hex
     while User.exists?(access_token: token)
